@@ -5,6 +5,8 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 public class github_activity {
 
@@ -87,19 +89,21 @@ public class github_activity {
     }
 
     private static void printRecentActivities(String responseBody) {
-        String[] parts = responseBody.split("\"type\":\"");
-        
-        if (parts.length == 0) {
-            System.out.println("No activities yet.");
-            return;
-        }
+        Pattern typePattern = Pattern.compile("\"type\":\"(.*?)\"");
+		Pattern repoPattern = Pattern.compile("\"repo\":\\{\"id\":\\d+,\"name\":\"(.*?)\"");
+		Pattern datePattern = Pattern.compile("\"created_at\":\"(.*?)\"");
+	
+		Matcher typeMatcher = typePattern.matcher(body);
+		Matcher repoMatcher = repoPattern.matcher(body);
+		Matcher dateMatcher = datePattern.matcher(body);
 
-        System.out.println("Recent activities: ");
-		for (int i = 0; i < parts.length; i++) {
-	    	if (i == 0) continue;
+		while (typeMatcher.find() && repoMatcher.find() && dateMatcher.find()) {
+    		String type = typeMatcher.group(1);
+    		String repo = repoMatcher.group(1);
+    		String date = dateMatcher.group(1).replace("T", " ").replace("Z", "");
 
-            String type = parts[i].substring(0, parts[i].indexOf("\""));
-            System.out.println("- " + type);		
+    		System.out.println(type + " on " + repo + " at " + date);
+			
 		}
     }
 }
