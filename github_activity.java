@@ -93,9 +93,9 @@ public class github_activity {
 		Pattern repoPattern = Pattern.compile("\"repo\":\\{\"id\":\\d+,\"name\":\"(.*?)\"");
 		Pattern datePattern = Pattern.compile("\"created_at\":\"(.*?)\"");
 	
-		Matcher typeMatcher = typePattern.matcher(body);
-		Matcher repoMatcher = repoPattern.matcher(body);
-		Matcher dateMatcher = datePattern.matcher(body);
+		Matcher typeMatcher = typePattern.matcher(responseBody);
+		Matcher repoMatcher = repoPattern.matcher(responseBody);
+		Matcher dateMatcher = datePattern.matcher(responseBody);
 
 		while (typeMatcher.find() && repoMatcher.find() && dateMatcher.find()) {
     		String type = typeMatcher.group(1);
