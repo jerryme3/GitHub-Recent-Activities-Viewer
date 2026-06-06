@@ -95,11 +95,11 @@ public class github_activity {
         }
 
         System.out.println("Recent activities: ");
-	for (int i = 0; i < parts.length; i++) {
-	    if (i == 0) continue;
+		for (int i = 0; i < parts.length; i++) {
+	    	if (i == 0) continue;
 
             String type = parts[i].substring(0, parts[i].indexOf("\""));
             System.out.println("- " + type);		
-	}
+		}
     }
 }
