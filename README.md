@@ -5,3 +5,6 @@ Steps on how to use this:
 3. Open the terminal inside the copied repository folder
 4. Paste this command to your terminal: javac github_activity.java 
 5. Then, paste this command after the other one: java github_activity (user to view) 
+
+
+Project URL: https://roadmap.sh/projects/github-user-activity
